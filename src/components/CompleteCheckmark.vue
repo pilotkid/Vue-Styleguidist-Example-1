@@ -8,7 +8,21 @@
       </v-row>
       <v-row>
         <v-col align="center">
-          <h1>{{Msg}}</h1>
+          <h1>
+            <slot name="message"></slot>
+          </h1>
+        </v-col>
+
+        <v-col align="center">
+          <h2>
+            <slot name="subtitle"></slot>
+          </h2>
+        </v-col>
+
+        <v-col align="center">
+          <p>
+            <slot name="body"></slot>
+          </p>
         </v-col>
       </v-row>
     </div>
@@ -16,9 +30,6 @@
 </template>
 
 <script>
-/**
- * This is a large checkmark in a circle centered on the screen
- */
 export default {
   name: "CompleteCheckmark",
   data() {
@@ -27,43 +38,22 @@ export default {
     };
   },
   props: {
-    /**
-     * Shows confetti when the screen is displayed
-     * @values `true`,`false`
-     */
     ShowConfetti: {
       default: false
     },
 
-    /**
-     * This is how long the confetti should fall
-     * @values 1000+
-     */
     ConfettiTimeout: {
       default: 1000
     },
 
-    /**
-     * Shows the item with the animation
-     * @values `true`,`false`
-     */
     Show: {
       default: false
     },
 
-    /**
-     * How long to show the completed screen
-     *
-     * **Should be 2x the confetti time**
-     * @values 2000+
-     */
     DisplayTime: {
       default: 2000
     },
 
-    /**
-     * Message to be displayed
-     */
     Msg: {
       default: "Success!"
     }
@@ -87,9 +77,6 @@ export default {
       if (val) {
         setTimeout(() => {
           this.StartTransistion = false;
-          /**
-           *This notifies that the animation has been completed
-           */
           this.$emit("Done");
         }, this.DisplayTime);
       }
@@ -137,22 +124,3 @@ export default {
   font-size: 96pt;
 }
 </style>
-
-<docs>
-```vue
-let ShowConfettiSwitch = false;
-let ShowComplete = false;
- 
-<v-switch v-model="ShowConfettiSwitch" label="Show Confetti"></v-switch >
-<v-btn color="primary" @click="ShowComplete=!ShowComplete">{{show ? "Hide":"Show"}}</v-btn>
-
-<CompleteCheckmark 
-    :ShowConfetti="ShowConfettiSwitch" 
-    :Show="ShowComplete"
-    @Done="ShowComplete = false"
-    >
-Woo! You clicked the Show button!
-</CompleteCheckmark>
-
-```
-</docs>
