@@ -6,7 +6,11 @@
         <v-card-text>{{Message}}</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn :color="BtnColor" depressed dark @click="CloseResult()">{{CloseText}}</v-btn>
+          <!-- 
+            This is the close event, that notifies the parent that the modal should be closed 
+            @event Close
+          -->
+          <v-btn :color="BtnColor" depressed dark @click="$emit('Close')">{{CloseText}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -28,19 +32,28 @@ export default {
     Display: {
       default: false
     },
+
+    /**
+     * The header message that displays above the body message
+     * @values any string
+     */
     Header: { default: "You need to set the `Header` prop" },
+
+    /**
+     * This is the main body message
+     */
     Message: { default: "You need to set the `Message` prop" },
 
+    /**
+     * This is the text to go on the close button
+     */
     CloseText: { default: "Okay" },
+
+    /**
+     * This is the color of the close button
+     * @values primary, secondary, accent, error, info, success, warning
+     */
     BtnColor: { default: "primary" }
-  },
-  methods: {
-    CloseResult() {
-      /**
-       * This is fired when the ok button is pressed
-       */
-      this.$emit("Close");
-    }
   }
 };
 </script>

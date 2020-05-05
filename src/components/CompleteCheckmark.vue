@@ -9,18 +9,21 @@
       <v-row>
         <v-col align="center">
           <h1>
+            <!-- @slot This is for your big message -->
             <slot name="message"></slot>
           </h1>
         </v-col>
 
         <v-col align="center">
           <h2>
+            <!-- @slot This is for smaller than title text -->
             <slot name="subtitle"></slot>
           </h2>
         </v-col>
 
         <v-col align="center">
           <p>
+            <!-- @slot Use this for a regular paragraph sized text below the subtitle -->
             <slot name="body"></slot>
           </p>
         </v-col>
@@ -38,24 +41,36 @@ export default {
     };
   },
   props: {
+    /**
+     * This will allow confetti to fall on the screen
+     * @values true, false
+     */
     ShowConfetti: {
       default: false
     },
 
+    /**
+     * This is how long confetti will be shown
+     * @values 1000+
+     */
     ConfettiTimeout: {
       default: 1000
     },
 
+    /**
+     * This is if the checkmark will be shown
+     * @values true, false
+     */
     Show: {
       default: false
     },
 
+    /**
+     * How long the checkmark is displayed
+     * @values 2000+ ( or 2x the confetti timeout )
+     */
     DisplayTime: {
       default: 2000
-    },
-
-    Msg: {
-      default: "Success!"
     }
   },
   mounted() {
@@ -77,6 +92,10 @@ export default {
       if (val) {
         setTimeout(() => {
           this.StartTransistion = false;
+
+          /**
+           * This notifies the parent that the animation is complete
+           */
           this.$emit("Done");
         }, this.DisplayTime);
       }
