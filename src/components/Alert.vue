@@ -14,10 +14,17 @@
 </template>
 
 <script>
+/**
+ * This provides a quick alert to the user, that they must confirm before continuing
+ */
 export default {
   name: "AlertModal",
 
   props: {
+    /**
+     * This controls if the modal is present on the screen
+     * @values true, false
+     */
     Display: {
       default: false
     },
@@ -29,6 +36,9 @@ export default {
   },
   methods: {
     CloseResult() {
+      /**
+       * This is fired when the ok button is pressed
+       */
       this.$emit("Close");
     }
   }
