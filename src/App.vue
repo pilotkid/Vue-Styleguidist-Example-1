@@ -11,7 +11,7 @@
           width="40"
         />
       </div>
-      <h1>Styleguidist - Tutorial 1 (Installation)</h1>
+      <h1>Styleguidist - Tutorial 2 (Into to documenting)</h1>
     </v-app-bar>
 
     <v-content class="ma-3">
